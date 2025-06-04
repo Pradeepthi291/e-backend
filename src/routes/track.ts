@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import express from "express";
 import { trackUser } from "../middleware/trackUser";
 import { UserSession } from "../models/UserSession";
@@ -5,7 +6,8 @@ import { UserSession } from "../models/UserSession";
 const router = express.Router();
 
 // POST /api/track
-router.post("/track", trackUser, async (req, res) => {
+router.post("/track", trackUser, async (req: Request, res: Response) => {
+
   try {
     const { sessionId, userId, isLoggedIn, interactions } = req.body;
 

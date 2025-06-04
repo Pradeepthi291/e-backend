@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import express from "express";
 import { UserSession } from "../models/UserSession";
 import { getStartDateFromRange } from "../utils";
@@ -5,7 +6,7 @@ import { getStartDateFromRange } from "../utils";
 
 const router = express.Router();
 
-router.get("/analytics", async (req, res) => {
+router.get("/analytics", async (req:Request, res:Response) => {
   try {
     const range = (req.query.range as string) || "all";
     const startDate = getStartDateFromRange(range);
