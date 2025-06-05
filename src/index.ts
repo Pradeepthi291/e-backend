@@ -40,6 +40,9 @@ app.use("/auth", authRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("API is working 🚀");
 });
+app.get("/api/test", (req: Request, res: Response) => {
+  res.send("Backend is working 🎉");
+});
 
 // Connect to MongoDB and start server
 connectDB()
