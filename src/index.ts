@@ -3,31 +3,34 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import useragent from "express-useragent";
+import session from "express-session";
+import mongoose from "mongoose";
+
 import { connectDB } from "./config/db"; // Your DB connection file
 import trackRoutes from "./routes/track";
 import adminRoutes from "./routes/admin";
 import authRoutes from "./routes/auth";
-import session from "express-session";
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
 
-// Middleware setup
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(useragent.express());
+
 app.use(
   session({
-    secret: "secretkey123", // Change this in production
+    secret: process.env.SESSION_SECRET || "defaultsecret",
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // true only if HTTPS
+    saveUninitialized: false,
+    cookie: { secure: process.env.NODE_ENV === "production" },
   })
 );
 
@@ -36,7 +39,7 @@ app.use("/api", trackRoutes);
 app.use("/admin", adminRoutes);
 app.use("/auth", authRoutes);
 
-// Test route
+// Test routes
 app.get("/", (req: Request, res: Response) => {
   res.send("API is working 🚀");
 });
