@@ -16,8 +16,8 @@ const app = express();
 
 // Middleware setup
 app.use(cors({
-  origin: 'http://localhost:3000', // your frontend URL here
-  credentials: true,               // allow cookies and auth headers
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true,
 }));
 
 app.use(express.json());
