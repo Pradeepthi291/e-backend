@@ -20,7 +20,7 @@ This is the backend for an e-commerce project focused on tracking user behavior 
 
 - Backend API: https://e-backend-2-hrwb.onrender.com/  
 - Admin Analytics API: https://e-backend-2-hrwb.onrender.com/admin/analytics  
-- Tracking API (POST): https://e-backend-2-hrwb.onrender.com/api/track  
+
 
 ---
 
