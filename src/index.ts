@@ -15,9 +15,20 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://e-frontend-omega.vercel.app"
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://e-frontend-omega.vercel.app/",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"), false);
+      }
+    },
     credentials: true,
   })
 );
